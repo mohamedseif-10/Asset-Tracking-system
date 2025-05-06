@@ -1,4 +1,4 @@
-package com.AssetManagementSystem.Manager.Model.entity;
+package com.AssetManagementSystem.Manager.model.entity;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -31,7 +31,11 @@ public class Asset {
     @Column(length = 25)
     private AssetStatus status;
 
+    @Column(name = "as_description", length = 500)
     private String description;
+
+    @Column(name = "update_date")
+    private LocalDateTime updateDate;
 
     @Column(name = "add_date")
     private LocalDateTime addDate;
@@ -103,6 +107,14 @@ public class Asset {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public LocalDateTime getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(LocalDateTime updateDate) {
+        this.updateDate = updateDate;
     }
 
     public List<AssetHistory> getAssetHistory() {

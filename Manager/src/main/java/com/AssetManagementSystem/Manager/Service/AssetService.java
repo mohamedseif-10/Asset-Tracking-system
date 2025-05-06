@@ -1,14 +1,20 @@
-package com.AssetManagementSystem.Manager.Service;
+package com.AssetManagementSystem.Manager.service;
 
-import com.AssetManagementSystem.Manager.Model.entity.*;
-import com.AssetManagementSystem.Manager.repository.*;
+import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import com.AssetManagementSystem.Manager.model.entity.Asset;
+import com.AssetManagementSystem.Manager.model.entity.AssetHistory;
+import com.AssetManagementSystem.Manager.model.entity.AssetHistoryStatus;
+import com.AssetManagementSystem.Manager.model.entity.AssetStatus;
+import com.AssetManagementSystem.Manager.model.entity.User;
+import com.AssetManagementSystem.Manager.repository.AssetHistoryRepo;
+import com.AssetManagementSystem.Manager.repository.AssetRepo;
+import com.AssetManagementSystem.Manager.repository.UserRepo;
 
 @Service
 public class AssetService {
@@ -33,13 +39,13 @@ public class AssetService {
     }
 
     public List<Asset> getAssetsByName(String name) {
-        return assetRepo.findByAsNameContainingIgnoreCase(name);
+        return assetRepo.findByNameContainingIgnoreCase(name);
     }
     public List<Asset> getAssetsByStatus(AssetStatus status) {
-        return assetRepo.findByAsStatus(status);
+        return assetRepo.findByStatus(status);
     }
     public List<Asset> getAssetsByUserId(Integer userId) {
-        return assetRepo.findByAssignedToUserId(userId);
+        return assetRepo.findByUserId(userId);
     }
 
 
@@ -151,7 +157,7 @@ public class AssetService {
 
 
     public List<AssetHistory> getAssetHistory(int assetId) {
-        return assetHistoryRepo.findByAssetIdOrderByStartDateDesc(assetId);
+        return assetHistoryRepo.findById(assetId);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

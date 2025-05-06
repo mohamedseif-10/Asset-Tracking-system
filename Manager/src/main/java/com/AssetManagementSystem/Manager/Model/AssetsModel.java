@@ -1,4 +1,4 @@
-package com.AssetManagementSystem.Manager.Model;
+package com.AssetManagementSystem.Manager.model;
 
 import org.springframework.stereotype.Component;
 

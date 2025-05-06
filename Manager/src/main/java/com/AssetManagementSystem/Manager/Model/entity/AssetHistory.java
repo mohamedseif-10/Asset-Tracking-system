@@ -1,4 +1,4 @@
-package com.AssetManagementSystem.Manager.Model.entity;
+package com.AssetManagementSystem.Manager.model.entity;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;

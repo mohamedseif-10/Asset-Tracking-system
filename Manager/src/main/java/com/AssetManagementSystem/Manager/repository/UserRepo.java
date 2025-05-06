@@ -1,6 +1,7 @@
 package com.AssetManagementSystem.Manager.repository;
-import com.AssetManagementSystem.Manager.Model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.AssetManagementSystem.Manager.model.entity.User;
 
 import java.util.Optional;
 
