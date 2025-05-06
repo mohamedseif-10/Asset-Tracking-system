@@ -1,21 +1,21 @@
 package com.AssetManagementSystem.Manager.service;
 
 import com.AssetManagementSystem.Manager.dto.RegisterRequest;
-import com.AssetManagementSystem.Manager.model.User;
-import com.AssetManagementSystem.Manager.repository.UserRepository;
+import com.AssetManagementSystem.Manager.model.entity.User;
+import com.AssetManagementSystem.Manager.repository.UserRepo;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthenticationService {
-    private final UserRepository userRepository;
+    private final UserRepo userRepo;
     private final PasswordEncoder passwordEncoder;
 
     public AuthenticationService(
-            UserRepository userRepository,
+            UserRepo userRepo,
             PasswordEncoder passwordEncoder
     ) {
-        this.userRepository = userRepository;
+        this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -26,6 +26,6 @@ public class AuthenticationService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(request.getRole());
 
-        return userRepository.save(user);
+        return userRepo.save(user);
     }
 } 
