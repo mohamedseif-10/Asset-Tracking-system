@@ -1,7 +1,7 @@
 package com.AssetManagementSystem.Manager.controller;
 
 import com.AssetManagementSystem.Manager.dto.RegisterRequest;
-import com.AssetManagementSystem.Manager.model.User;
+import com.AssetManagementSystem.Manager.model.entity.User;
 import com.AssetManagementSystem.Manager.service.AuthenticationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
