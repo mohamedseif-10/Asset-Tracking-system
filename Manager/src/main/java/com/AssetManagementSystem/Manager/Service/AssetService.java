@@ -67,6 +67,22 @@ public class AssetService {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Transactional
+    public Asset updateAsset(int id, String name, String description, AssetStatus status) {
+        Asset asset = assetRepo.findById(id).orElse(null);
+        if (asset != null) {
+            asset.setName(name);
+            asset.setDescription(description);
+            asset.setStatus(status);
+            Asset updatedAsset = assetRepo.save(asset);
+
+            createTransactionHistory(updatedAsset, null, AssetHistoryStatus.UPDATED);
+            return updatedAsset;
+        }
+        return null;
+    }
+
+
+    @Transactional
     public Asset updateAssetName(int id, String name) {
         Asset asset = assetRepo.findById(id).orElse(null);
         if (asset != null) {
@@ -126,10 +142,19 @@ public class AssetService {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void deleteAsset(int id) {
-        assetRepo.deleteById(id);
-        createTransactionHistory(null, null, AssetHistoryStatus.DELETED);
+    @Transactional
+    public boolean deleteAsset(int id) {
+        if (assetRepo.existsById(id)) {
+            Asset asset = assetRepo.findById(id).orElse(null);
+            assetRepo.deleteById(id);
+
+            createTransactionHistory(asset, null, AssetHistoryStatus.DELETED);
+
+            return true;
+        }
+        return false;
     }
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -145,10 +170,7 @@ public class AssetService {
             Asset updatedAsset = assetRepo.save(asset);
             createTransactionHistory(updatedAsset, user, AssetHistoryStatus.ASSIGNED);
 
-            return updatedAsset;
-        } else if (asset != null && asset.getStatus() == AssetStatus.IN_USE) {
-            throw new IllegalStateException("The asset is already in use and cannot be assigned.");
-        }
+            return updatedAsset;}
         return null;
     }
 
