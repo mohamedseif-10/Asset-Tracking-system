@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-// API endpoints for asset management
 @RestController
 @RequestMapping("/api")
 public class AssetsController {
@@ -29,6 +28,8 @@ public class AssetsController {
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(createdAsset);
     }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // READ
     @GetMapping("/assets")
@@ -76,6 +77,8 @@ public class AssetsController {
         return ResponseEntity.ok(assets);
     }
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     // UPDATE
     @PutMapping("/assets/update/{id}")
     public ResponseEntity<Asset> updateAsset(@PathVariable int id, @RequestBody Asset asset) {
@@ -122,6 +125,9 @@ public class AssetsController {
         return ResponseEntity.ok(updatedAsset);
     }
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
     // DELETE
     @DeleteMapping("/assets/delete/{id}")
     public ResponseEntity<Void> deleteAsset(@PathVariable int id) {
@@ -131,6 +137,8 @@ public class AssetsController {
         }
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // Assign asset to user
     @PatchMapping("/assets/assign")
