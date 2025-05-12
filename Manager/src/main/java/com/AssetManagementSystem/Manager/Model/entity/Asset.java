@@ -3,6 +3,7 @@ package com.AssetManagementSystem.Manager.model.entity;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,19 +36,21 @@ public class Asset {
     @Column(length = 25)
     private AssetStatus status;
 
-    @Column(name = "as_description", length = 500)
+    @Column(name = "description", length = 500)
     private String description;
 
     @Column(name = "update_date")
     private LocalDateTime updateDate;
 
-    @Column(name = "add_date")
+    @Column(name = "add_date", insertable = false, updatable = false)
     private LocalDateTime addDate;
 
+    @JsonIgnore // Prevents circular reference when serializing to JSON
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "asset")
     private List<AssetHistory> assetHistory;
 
@@ -59,7 +62,6 @@ public class Asset {
         this.name = name;
         this.status = status;
         this.description = description;
-        this.addDate = LocalDateTime.now();
         this.user = user;
         this.assetHistory = assetHistory;
     }

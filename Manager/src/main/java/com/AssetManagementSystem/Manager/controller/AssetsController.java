@@ -3,25 +3,40 @@ package com.AssetManagementSystem.Manager.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.AssetManagementSystem.Manager.model.entity.Asset;
 import com.AssetManagementSystem.Manager.model.entity.AssetStatus;
 import com.AssetManagementSystem.Manager.service.AssetService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/auth")
 public class AssetsController {
 
     @Autowired
     private AssetService assetService;
 
     // CREATE
+    // Tested with Postman
+    // @RequestBody is used to bind the HTTP request body to a Java object
+    // RequestBody is 
+    // {
+    //     "name":"Asset1",
+    //     "description":"Crying now"
+    // }
     @PostMapping("/assets/create")
-    public ResponseEntity<Asset> createAsset(@RequestBody Asset asset) {
+    public ResponseEntity<Asset> createAssets(@RequestBody Asset asset) {
         Asset createdAsset = assetService.createAsset(asset.getName(), asset.getDescription());
         if (createdAsset == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -34,7 +49,7 @@ public class AssetsController {
     // READ
     @GetMapping("/assets")
     public ResponseEntity<List<Asset>> getAllAssets() {
-        List<Asset> assets = assetService.getAllAssets();
+        List<Asset> assets = assetService.getAll_Assets();
         if (assets == null || assets.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
@@ -141,8 +156,9 @@ public class AssetsController {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // Assign asset to user
+    // Tested with Postman 
     @PatchMapping("/assets/assign")
-    public ResponseEntity<Asset> assignAssetToUser(@RequestParam int assetId, @RequestParam Integer userId) {
+    public ResponseEntity<Asset> assignAssetToUser(@RequestParam("as_id") int assetId, @RequestParam("u_id") Integer userId) {
         Asset updatedAsset = assetService.assignAssetToUser(assetId, userId);
         if (updatedAsset == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
