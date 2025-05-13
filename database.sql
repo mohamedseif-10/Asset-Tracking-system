@@ -1,4 +1,8 @@
-DROP DATABASE asset_tracking_system;
+SELECT * from assets;
+select * from users;
+select * from asset_history;
+
+Drop database asset_tracking_system;
 
 CREATE DATABASE Asset_Tracking_System;
 USE Asset_Tracking_System;
@@ -18,8 +22,7 @@ CREATE TABLE assets (
     as_name VARCHAR(100) NOT NULL,
     status VARCHAR(18) CHECK (status IN ('IN_USE', 'AVAILABLE', 'UNDER_MAINTENANCE')), -- asset availability status
     description TEXT,
-    add_date DATETIME DEFAULT CURRENT_TIMESTAMP, -- date added (automatically set)
-    update_date TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+    add_date DATETIME DEFAULT NOW(), -- date added (automatically set)
     user_id INT, -- null if not in use
     FOREIGN KEY (user_id) REFERENCES users(u_id) ON DELETE SET NULL
 );
@@ -31,11 +34,10 @@ CREATE INDEX idx_user_id ON assets(user_id);
 CREATE TABLE asset_history (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT,
-    manager_id INT,
     asset_id INT NOT NULL,
     log_date DATETIME,
     status VARCHAR(18) NOT NULL CHECK (status IN ('ASSIGNED', 'UNASSIGNED', 'UNDER_MAINTENANCE', 'UPDATED', 'DELETED')),
-    FOREIGN KEY (user_id) REFERENCES users(u_id) ON DELETE CASCADE,
-    FOREIGN KEY (asset_id) REFERENCES assets(as_id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES users(u_id),
+    FOREIGN KEY (asset_id) REFERENCES assets(as_id)
 );
 

@@ -9,8 +9,10 @@ import com.AssetManagementSystem.Manager.model.entity.AssetHistory;
 
 public interface AssetHistoryRepo extends JpaRepository<AssetHistory, Integer> {
 
+    
     List<AssetHistory> findById(int assetId);
-
+    List<AssetHistory> findByUserId(int userId);
+    List<AssetHistory> findByAssetId(int assetId);
     List<AssetHistory> findByLogDate(LocalDateTime logDate);
 
     // List<AssetHistory> findByUserIdOrderByStartDateDesc(Integer userId);

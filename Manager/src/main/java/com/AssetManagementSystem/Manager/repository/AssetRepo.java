@@ -15,7 +15,6 @@ Optional<Asset> findById(int id);
 List<Asset> findByName(String name);
 List<Asset> findByStatus(AssetStatus status);
 List<Asset> findByAddDate(LocalDate addDate);
-List<Asset> findByUpdateDate(LocalDate updateDate);
 List<Asset> findByNameContainingIgnoreCase(String keyword);
 List<Asset> findByUserId(Integer userId);
 List<Asset> findByUserIdIsNull();

@@ -16,9 +16,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-// import assetsStatus
-
-
 
 @Entity
 @Table(name = "assets")
@@ -39,11 +36,8 @@ public class Asset {
     @Column(name = "description", length = 500)
     private String description;
 
-    @Column(name = "update_date")
-    private LocalDateTime updateDate;
-
-    @Column(name = "add_date", insertable = false, updatable = false)
-    private LocalDateTime addDate;
+    @Column(name = "add_date")
+    private LocalDateTime addDate = LocalDateTime.now();
 
     @JsonIgnore // Prevents circular reference when serializing to JSON
     @ManyToOne
@@ -54,8 +48,8 @@ public class Asset {
     @OneToMany(mappedBy = "asset")
     private List<AssetHistory> assetHistory;
 
-    
-    public Asset() {}
+    public Asset() {
+    }
 
     public Asset(String name, AssetStatus status, String description, User user,
             List<AssetHistory> assetHistory) {
@@ -65,7 +59,6 @@ public class Asset {
         this.user = user;
         this.assetHistory = assetHistory;
     }
-    
 
     public int getId() {
         return id;
@@ -113,14 +106,6 @@ public class Asset {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public LocalDateTime getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(LocalDateTime updateDate) {
-        this.updateDate = updateDate;
     }
 
     public List<AssetHistory> getAssetHistory() {

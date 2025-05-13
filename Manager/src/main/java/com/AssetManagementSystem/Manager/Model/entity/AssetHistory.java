@@ -1,6 +1,7 @@
 package com.AssetManagementSystem.Manager.model.entity;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -21,10 +22,13 @@ public class AssetHistory {
     @Column(name = "id")
     private int id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
+    
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "asset_id", nullable = false)
     private Asset asset;

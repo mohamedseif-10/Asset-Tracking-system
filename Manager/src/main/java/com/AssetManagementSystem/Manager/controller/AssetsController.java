@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.AssetManagementSystem.Manager.model.entity.Asset;
+import com.AssetManagementSystem.Manager.model.entity.AssetHistory;
 import com.AssetManagementSystem.Manager.model.entity.AssetStatus;
 import com.AssetManagementSystem.Manager.service.AssetService;
 
@@ -25,15 +26,16 @@ import com.AssetManagementSystem.Manager.service.AssetService;
 public class AssetsController {
 
     @Autowired
-    private AssetService assetService;
+    private AssetService 
+    assetService;
 
     // CREATE
     // Tested with Postman
     // @RequestBody is used to bind the HTTP request body to a Java object
-    // RequestBody is 
+    // RequestBody is
     // {
-    //     "name":"Asset1",
-    //     "description":"Crying now"
+    // "name":"Asset1",
+    // "description":"Crying now"
     // }
     @PostMapping("/assets/create")
     public ResponseEntity<Asset> createAssets(@RequestBody Asset asset) {
@@ -47,6 +49,7 @@ public class AssetsController {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // READ
+    // Tested
     @GetMapping("/assets")
     public ResponseEntity<List<Asset>> getAllAssets() {
         List<Asset> assets = assetService.getAll_Assets();
@@ -56,6 +59,7 @@ public class AssetsController {
         return ResponseEntity.ok(assets);
     }
 
+    // Tested
     @GetMapping("/assets/{id}")
     public ResponseEntity<Asset> getAssetById(@PathVariable int id) {
         Asset asset = assetService.getAssetById(id);
@@ -65,6 +69,7 @@ public class AssetsController {
         return ResponseEntity.ok(asset);
     }
 
+    // Tested
     @GetMapping("/assets/name/{name}")
     public ResponseEntity<List<Asset>> getAssetsByName(@PathVariable String name) {
         List<Asset> assets = assetService.getAssetsByName(name);
@@ -74,6 +79,7 @@ public class AssetsController {
         return ResponseEntity.ok(assets);
     }
 
+    // Tested
     @GetMapping("/assets/status/{status}")
     public ResponseEntity<List<Asset>> getAssetsByStatus(@PathVariable AssetStatus status) {
         List<Asset> assets = assetService.getAssetsByStatus(status);
@@ -83,6 +89,7 @@ public class AssetsController {
         return ResponseEntity.ok(assets);
     }
 
+    // Tested
     @GetMapping("/assets/user/{userId}")
     public ResponseEntity<List<Asset>> getAssetsByUserId(@PathVariable Integer userId) {
         List<Asset> assets = assetService.getAssetsByUserId(userId);
@@ -92,8 +99,39 @@ public class AssetsController {
         return ResponseEntity.ok(assets);
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Tested 
+    // There is bug that user_id and asset_id doesn't appear in the json response
+    @GetMapping("/asset_history/{assetId}")
+    public ResponseEntity<List<AssetHistory>> getAssetHistory(@PathVariable Integer assetId) {
+        List<AssetHistory> assetHistory = assetService.getAssetHistoryID(assetId);
+        if (assetHistory == null || assetHistory.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+        return ResponseEntity.ok(assetHistory);
+    }
 
+    // Tested
+    // The same as above    
+    @GetMapping("/asset_history/user/{userId}")
+    public ResponseEntity<List<AssetHistory>> getUserAssetHistory(@PathVariable Integer userId) {
+        List<AssetHistory> assetHistory = assetService.getUserAssetHistory(userId);
+        if (assetHistory == null || assetHistory.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+        return ResponseEntity.ok(assetHistory);
+    }
+
+
+    @GetMapping("/asset_history")
+    public ResponseEntity<List<AssetHistory>> getAllAssetHistory() {
+        List<AssetHistory> assetHistory = assetService.getAllHistory();
+        if (assetHistory == null || assetHistory.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+        return ResponseEntity.ok(assetHistory);
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // /
     // UPDATE
     @PutMapping("/assets/update/{id}")
     public ResponseEntity<Asset> updateAsset(@PathVariable int id, @RequestBody Asset asset) {
@@ -131,6 +169,8 @@ public class AssetsController {
         return ResponseEntity.ok(updatedAsset);
     }
 
+    // Update asset assigned user
+    // Tested with Postman
     @PatchMapping("/assets/update-asset-user")
     public ResponseEntity<Asset> updateAssetUser(@RequestParam("a") int id, @RequestParam("u") Integer userId) {
         Asset updatedAsset = assetService.updateAssetAssignedUser(id, userId);
@@ -142,23 +182,23 @@ public class AssetsController {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
     // DELETE
+    // Tested with Postman
     @DeleteMapping("/assets/delete/{id}")
     public ResponseEntity<Void> deleteAsset(@PathVariable int id) {
-        boolean deleted = assetService.deleteAsset(id);
-        if (!deleted) {
+        boolean isDeleted = assetService.deleteAsset(id);
+        if (!isDeleted) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
-
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // Assign asset to user
-    // Tested with Postman 
+    // Tested with Postman
     @PatchMapping("/assets/assign")
-    public ResponseEntity<Asset> assignAssetToUser(@RequestParam("as_id") int assetId, @RequestParam("u_id") Integer userId) {
+    public ResponseEntity<Asset> assignAssetToUser(@RequestParam("as_id") int assetId,
+            @RequestParam("u_id") Integer userId) {
         Asset updatedAsset = assetService.assignAssetToUser(assetId, userId);
         if (updatedAsset == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -166,4 +206,3 @@ public class AssetsController {
         return ResponseEntity.ok(updatedAsset);
     }
 }
-

@@ -147,14 +147,13 @@ public class AssetService {
         if (assetRepo.existsById(id)) {
             Asset asset = assetRepo.findById(id).orElse(null);
             assetRepo.deleteById(id);
-
+            
             createTransactionHistory(asset, null, AssetHistoryStatus.DELETED);
 
             return true;
         }
         return false;
-    }
-
+    }    
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -178,10 +177,17 @@ public class AssetService {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    public List<AssetHistory> getAssetHistory(int assetId) {
+    public List<AssetHistory> getAssetHistoryID(int assetId) {
         return assetHistoryRepo.findById(assetId);
     }
 
+    public List<AssetHistory> getUserAssetHistory(int userId) {
+        return assetHistoryRepo.findByUserId(userId);
+    }
+
+    public List<AssetHistory> getAllHistory() {
+        return assetHistoryRepo.findAll();
+    }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private void createTransactionHistory(Asset asset, User user, AssetHistoryStatus status) {
