@@ -1,0 +1,18 @@
+2025-05-14 01:01:33 INFO  c.A.Manager.LoggingAspect - Method createAsset executed successfully in 90 ms.
+2025-05-14 01:23:28 INFO  c.A.Manager.LoggingAspect - Method getAll_Assets executed successfully in 392 ms.
+2025-05-14 01:23:42 INFO  c.A.Manager.LoggingAspect - Method getAll_Assets executed successfully in 15 ms.
+2025-05-14 01:23:44 INFO  c.A.Manager.LoggingAspect - Method getAll_Assets executed successfully in 28 ms.
+2025-05-14 01:26:17 INFO  c.A.Manager.LoggingAspect - Method updateAsset executed successfully in 311 ms.
+2025-05-14 01:26:50 INFO  c.A.Manager.LoggingAspect - Method updateAsset executed successfully in 58 ms.
+2025-05-14 01:27:02 INFO  c.A.Manager.LoggingAspect - Method getAll_Assets executed successfully in 48 ms.
+2025-05-14 01:27:14 INFO  c.A.Manager.LoggingAspect - Method getAllAssetHistory executed successfully in 18 ms.
+2025-05-14 01:28:09 INFO  c.A.Manager.LoggingAspect - Method getAllAssetHistory executed successfully in 35 ms.
+2025-05-14 01:30:58 INFO  c.A.Manager.LoggingAspect - Method getAllAssetHistory executed successfully in 616 ms.
+2025-05-14 01:33:56 INFO  c.A.Manager.LoggingAspect - Method getAllAssetHistory executed successfully in 503 ms.
+2025-05-14 01:33:56 WARN  c.A.M.a.PerformanceMonitoringAspect - Method getAllAssetHistory took 507 ms to execute, which is longer than expected.
+2025-05-14 01:35:27 WARN  c.A.M.a.PerformanceMonitoringAspect - Method getAllAssetHistory took 672 ms to execute, which is longer than expected.
+2025-05-14 01:37:18 INFO  c.A.Manager.LoggingAspect - Method getAllAssetHistory executed successfully in 282 ms.
+2025-05-14 01:37:19 INFO  c.A.Manager.LoggingAspect - Method getAllAssetHistory executed successfully in 10 ms.
+2025-05-14 01:37:21 INFO  c.A.Manager.LoggingAspect - Method getAllAssetHistory executed successfully in 41 ms.
+2025-05-14 01:38:31 INFO  c.A.Manager.LoggingAspect - Method getAllAssetHistory executed successfully in 626 ms.
+2025-05-14 01:38:31 WARN  c.A.M.a.PerformanceMonitoringAspect - Method getAllAssetHistory took 631 ms to execute, which is longer than expected.
