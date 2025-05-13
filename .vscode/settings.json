@@ -1,4 +1,10 @@
 {
     "java.compile.nullAnalysis.mode": "automatic",
+<<<<<<< HEAD
     "java.configuration.updateBuildConfiguration": "interactive"
+=======
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.home": "D:\\c\\Java",
+    "java.jdt.ls.java.home": "D:\\c\\Java"
+>>>>>>> main
 }

@@ -5,7 +5,11 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
+<<<<<<< HEAD
 		<version>3.2.3</version>
+=======
+		<version>3.4.4</version>
+>>>>>>> main
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.AssetManagementSystem</groupId>
@@ -34,7 +38,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -42,6 +49,13 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
+<<<<<<< HEAD
+=======
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		<dependency>
+>>>>>>> main
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
@@ -51,6 +65,7 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+<<<<<<< HEAD
 		<!-- MySQL Connector -->
 		<dependency>
 			<groupId>com.mysql</groupId>
@@ -59,11 +74,31 @@
 		</dependency>
 
 		<!-- Spring Data JPA -->
+=======
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.33</version>
+			<scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+		<dependency>
+			<groupId>jakarta.persistence</groupId>
+			<artifactId>jakarta.persistence-api</artifactId>
+		</dependency>
+
+>>>>>>> main
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
+<<<<<<< HEAD
 		<!-- Spring Security -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -94,6 +129,19 @@
 			<version>0.11.5</version>
 			<scope>runtime</scope>
 		</dependency>
+=======
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>6.2.6.Final</version>
+		</dependency>
+
+		<!-- <dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency> -->
+>>>>>>> main
 	</dependencies>
 
 	<build>
