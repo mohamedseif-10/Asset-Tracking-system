@@ -1,0 +1,15 @@
+E:\FCIH\6th term\SEW-2\Asset-Tracking-system-main\Manager\src\main\java\com\AssetManagementSystem\Manager\ManagerApplication.java
+E:\FCIH\6th term\SEW-2\Asset-Tracking-system-main\Manager\src\main\java\com\AssetManagementSystem\Manager\service\CustomUserDetailsService.java
+E:\FCIH\6th term\SEW-2\Asset-Tracking-system-main\Manager\src\main\java\com\AssetManagementSystem\Manager\security\JwtAuthenticationFilter.java
+E:\FCIH\6th term\SEW-2\Asset-Tracking-system-main\Manager\src\main\java\com\AssetManagementSystem\Manager\HomeController.java
+E:\FCIH\6th term\SEW-2\Asset-Tracking-system-main\Manager\src\main\java\com\AssetManagementSystem\Manager\security\SecurityConfig.java
+E:\FCIH\6th term\SEW-2\Asset-Tracking-system-main\Manager\src\main\java\com\AssetManagementSystem\Manager\model\AssetHistory.java
+E:\FCIH\6th term\SEW-2\Asset-Tracking-system-main\Manager\src\main\java\com\AssetManagementSystem\Manager\dto\AuthenticationResponse.java
+E:\FCIH\6th term\SEW-2\Asset-Tracking-system-main\Manager\src\main\java\com\AssetManagementSystem\Manager\repository\UserRepository.java
+E:\FCIH\6th term\SEW-2\Asset-Tracking-system-main\Manager\src\main\java\com\AssetManagementSystem\Manager\security\JwtUtils.java
+E:\FCIH\6th term\SEW-2\Asset-Tracking-system-main\Manager\src\main\java\com\AssetManagementSystem\Manager\service\AuthenticationService.java
+E:\FCIH\6th term\SEW-2\Asset-Tracking-system-main\Manager\src\main\java\com\AssetManagementSystem\Manager\controller\AuthController.java
+E:\FCIH\6th term\SEW-2\Asset-Tracking-system-main\Manager\src\main\java\com\AssetManagementSystem\Manager\model\Asset.java
+E:\FCIH\6th term\SEW-2\Asset-Tracking-system-main\Manager\src\main\java\com\AssetManagementSystem\Manager\model\User.java
+E:\FCIH\6th term\SEW-2\Asset-Tracking-system-main\Manager\src\main\java\com\AssetManagementSystem\Manager\dto\AuthenticationRequest.java
+E:\FCIH\6th term\SEW-2\Asset-Tracking-system-main\Manager\src\main\java\com\AssetManagementSystem\Manager\dto\RegisterRequest.java
