@@ -1,4 +1,6 @@
 {
     "java.compile.nullAnalysis.mode": "automatic",
-    "java.configuration.updateBuildConfiguration": "automatic"
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.home": "D:\\c\\Java",
+    "java.jdt.ls.java.home": "D:\\c\\Java"
 }
