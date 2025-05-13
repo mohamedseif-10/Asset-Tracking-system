@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.AssetManagementSystem.Manager.dto.AssetHistoryDTO;
 import com.AssetManagementSystem.Manager.model.entity.Asset;
-import com.AssetManagementSystem.Manager.model.entity.AssetHistory;
+import com.AssetManagementSystem.Manager.model.entity.AssetHistoryStatus;
 import com.AssetManagementSystem.Manager.model.entity.AssetStatus;
 import com.AssetManagementSystem.Manager.service.AssetService;
 
@@ -26,8 +27,7 @@ import com.AssetManagementSystem.Manager.service.AssetService;
 public class AssetsController {
 
     @Autowired
-    private AssetService 
-    assetService;
+    private AssetService assetService;
 
     // CREATE
     // Tested with Postman
@@ -99,40 +99,50 @@ public class AssetsController {
         return ResponseEntity.ok(assets);
     }
 
-    // Tested 
-    // There is bug that user_id and asset_id doesn't appear in the json response
+    // Tested
     @GetMapping("/asset_history/{assetId}")
-    public ResponseEntity<List<AssetHistory>> getAssetHistory(@PathVariable Integer assetId) {
-        List<AssetHistory> assetHistory = assetService.getAssetHistoryID(assetId);
-        if (assetHistory == null || assetHistory.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    public ResponseEntity<List<AssetHistoryDTO>> getAssetHistory(@PathVariable Integer assetId) {
+        List<AssetHistoryDTO> history = assetService.getAssetHistoryByAssetId(assetId);
+        if (history.isEmpty()) {
+            return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok(assetHistory);
+        return ResponseEntity.ok(history);
     }
 
     // Tested
-    // The same as above    
     @GetMapping("/asset_history/user/{userId}")
-    public ResponseEntity<List<AssetHistory>> getUserAssetHistory(@PathVariable Integer userId) {
-        List<AssetHistory> assetHistory = assetService.getUserAssetHistory(userId);
-        if (assetHistory == null || assetHistory.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    public ResponseEntity<List<AssetHistoryDTO>> getUserAssetHistory(@PathVariable Integer userId) {
+        List<AssetHistoryDTO> history = assetService.getAssetHistoryByUserId(userId);
+        if (history.isEmpty()) {
+            return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok(assetHistory);
+        return ResponseEntity.ok(history);
     }
 
-
+    // Tested
     @GetMapping("/asset_history")
-    public ResponseEntity<List<AssetHistory>> getAllAssetHistory() {
-        List<AssetHistory> assetHistory = assetService.getAllHistory();
-        if (assetHistory == null || assetHistory.isEmpty()) {
+    public ResponseEntity<List<AssetHistoryDTO>> getAllAssetHistory() {
+        List<AssetHistoryDTO> history = assetService.getAllAssetHistory();
+        if (history.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
-        return ResponseEntity.ok(assetHistory);
+        return ResponseEntity.ok(history);
     }
+
+    // Tested
+    @GetMapping("/asset_history/status/{status}")
+    public ResponseEntity<List<AssetHistoryDTO>> getAssetHistoryByStatus(@PathVariable AssetHistoryStatus status) {
+        List<AssetHistoryDTO> history = assetService.getAssetHistoryByStatus(status);
+        if (history.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(history);
+    }
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // /
     // UPDATE
+    // Tested with Postman
     @PutMapping("/assets/update/{id}")
     public ResponseEntity<Asset> updateAsset(@PathVariable int id, @RequestBody Asset asset) {
         Asset updatedAsset = assetService.updateAsset(id, asset.getName(), asset.getDescription(), asset.getStatus());
@@ -142,32 +152,32 @@ public class AssetsController {
         return ResponseEntity.ok(updatedAsset);
     }
 
-    @PatchMapping("/assets/update-status")
-    public ResponseEntity<Asset> updateAssetStatus(@RequestParam int id, @RequestParam AssetStatus status) {
-        Asset updatedAsset = assetService.updateAssetStatus(id, status);
-        if (updatedAsset == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        return ResponseEntity.ok(updatedAsset);
-    }
+    // @PatchMapping("/assets/update-status/{id}")
+    // public ResponseEntity<Asset> updateAssetStatus(@PathVariable int id, @RequestParam AssetStatus status) {
+    //     Asset updatedAsset = assetService.updateAssetStatus(id, status);
+    //     if (updatedAsset == null) {
+    //         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    //     }
+    //     return ResponseEntity.ok(updatedAsset);
+    // }
 
-    @PatchMapping("/assets/update-name")
-    public ResponseEntity<Asset> updateAssetName(@RequestParam int id, @RequestParam String name) {
-        Asset updatedAsset = assetService.updateAssetName(id, name);
-        if (updatedAsset == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        return ResponseEntity.ok(updatedAsset);
-    }
+    // @PatchMapping("/assets/update-name")
+    // public ResponseEntity<Asset> updateAssetName(@RequestParam int id, @RequestParam String name) {
+    //     Asset updatedAsset = assetService.updateAssetName(id, name);
+    //     if (updatedAsset == null) {
+    //         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    //     }
+    //     return ResponseEntity.ok(updatedAsset);
+    // }
 
-    @PatchMapping("/assets/update-description")
-    public ResponseEntity<Asset> updateAssetDescription(@RequestParam int id, @RequestParam String description) {
-        Asset updatedAsset = assetService.updateAssetDescription(id, description);
-        if (updatedAsset == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        return ResponseEntity.ok(updatedAsset);
-    }
+    // @PatchMapping("/assets/update-description")
+    // public ResponseEntity<Asset> updateAssetDescription(@RequestParam int id, @RequestParam String description) {
+    //     Asset updatedAsset = assetService.updateAssetDescription(id, description);
+    //     if (updatedAsset == null) {
+    //         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    //     }
+    //     return ResponseEntity.ok(updatedAsset);
+    // }
 
     // Update asset assigned user
     // Tested with Postman
@@ -206,3 +216,4 @@ public class AssetsController {
         return ResponseEntity.ok(updatedAsset);
     }
 }
+

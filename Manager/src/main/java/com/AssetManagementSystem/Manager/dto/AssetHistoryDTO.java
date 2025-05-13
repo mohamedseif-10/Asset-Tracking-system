@@ -57,3 +57,4 @@ public class AssetHistoryDTO {
         this.status = status;
     }
 }
+

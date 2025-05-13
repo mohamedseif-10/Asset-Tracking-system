@@ -1,37 +1,24 @@
 package com.AssetManagementSystem.Manager.model.entity;
+
 import java.time.LocalDateTime;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "asset_history")
 public class AssetHistory {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    // No FK relation—just a raw user ID
+    @Column(name = "user_id")
+    private Integer userId;
 
-    
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "asset_id", nullable = false)
-    private Asset asset;
+    // No FK relation—just a raw asset ID
+    @Column(name = "asset_id", nullable = false)
+    private Integer assetId;
 
     @Column(name = "log_date")
     private LocalDateTime logDate;
@@ -40,7 +27,19 @@ public class AssetHistory {
     @Column(name = "status", nullable = false)
     private AssetHistoryStatus status;
 
+    // -- Constructors (optional) --
 
+    public AssetHistory() {
+    }
+
+    public AssetHistory(Integer userId, Integer assetId, LocalDateTime logDate, AssetHistoryStatus status) {
+        this.userId = userId;
+        this.assetId = assetId;
+        this.logDate = logDate;
+        this.status = status;
+    }
+
+    // -- Getters & Setters --
 
     public int getId() {
         return id;
@@ -50,25 +49,26 @@ public class AssetHistory {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public Asset getAsset() {
-        return asset;
+    public Integer getAssetId() {
+        return assetId;
     }
 
-    public void setAsset(Asset asset) {
-        this.asset = asset;
+    public void setAssetId(Integer assetId) {
+        this.assetId = assetId;
     }
 
     public LocalDateTime getLogDate() {
         return logDate;
     }
+
     public void setLogDate(LocalDateTime logDate) {
         this.logDate = logDate;
     }

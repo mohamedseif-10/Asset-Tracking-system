@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.AssetManagementSystem.Manager.model.entity.AssetHistory;
+import com.AssetManagementSystem.Manager.model.entity.AssetHistoryStatus;
 
 public interface AssetHistoryRepo extends JpaRepository<AssetHistory, Integer> {
 
@@ -14,14 +15,6 @@ public interface AssetHistoryRepo extends JpaRepository<AssetHistory, Integer> {
     List<AssetHistory> findByUserId(int userId);
     List<AssetHistory> findByAssetId(int assetId);
     List<AssetHistory> findByLogDate(LocalDateTime logDate);
-
-    // List<AssetHistory> findByUserIdOrderByStartDateDesc(Integer userId);
-    // List<AssetHistory> findByStatus(AssetHistoryStatus status);
-    // List<AssetHistory> findByStatusAndEndDateIsNull(AssetHistoryStatus status);
-    // List<AssetHistory> findByEndDateIsNull();
-    // List<AssetHistory> findByStartDateBetween(LocalDateTime startDate,
-    // LocalDateTime endDate);
-    // List<AssetHistory> findByAssetIdAndStatusAndEndDateIsNull(int assetId, String
-    // status);
+    List<AssetHistory> findByStatus(AssetHistoryStatus status);
 
 }

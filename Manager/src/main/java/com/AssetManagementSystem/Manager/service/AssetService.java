@@ -2,11 +2,13 @@ package com.AssetManagementSystem.Manager.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.AssetManagementSystem.Manager.dto.AssetHistoryDTO;
 import com.AssetManagementSystem.Manager.model.entity.Asset;
 import com.AssetManagementSystem.Manager.model.entity.AssetHistory;
 import com.AssetManagementSystem.Manager.model.entity.AssetHistoryStatus;
@@ -73,6 +75,10 @@ public class AssetService {
             asset.setName(name);
             asset.setDescription(description);
             asset.setStatus(status);
+            // set the user_id to null if the status is available
+            if (status == AssetStatus.AVAILABLE || status == AssetStatus.UNDER_MAINTENANCE) {
+                asset.setUser(null);
+            }
             Asset updatedAsset = assetRepo.save(asset);
 
             createTransactionHistory(updatedAsset, null, AssetHistoryStatus.UPDATED);
@@ -122,6 +128,8 @@ public class AssetService {
         }
         return null;
     }
+
+    
     @Transactional
     public Asset updateAssetAssignedUser(int asset_id, Integer userId) {
         Asset asset = assetRepo.findById(asset_id).orElse(null);
@@ -177,23 +185,68 @@ public class AssetService {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    public List<AssetHistory> getAssetHistoryID(int assetId) {
-        return assetHistoryRepo.findById(assetId);
+    // public List<AssetHistory> getAssetHistoryID(int assetId) {
+    //     return assetHistoryRepo.findById(assetId);
+    // }
+
+    // public List<AssetHistory> getUserAssetHistory(int userId) {
+    //     return assetHistoryRepo.findByUserId(userId);
+    // }
+
+    // public List<AssetHistory> getAllHistory() {
+    //     return assetHistoryRepo.findAll();
+    // }
+
+    @Transactional
+    public List<AssetHistoryDTO> getAssetHistoryByAssetId(int assetId) {
+        return assetHistoryRepo.findByAssetId(assetId)
+            .stream()
+            .map(this::toDto)
+            .collect(Collectors.toList());
     }
 
-    public List<AssetHistory> getUserAssetHistory(int userId) {
-        return assetHistoryRepo.findByUserId(userId);
+    @Transactional
+    public List<AssetHistoryDTO> getAssetHistoryByUserId(int userId) {
+        return assetHistoryRepo.findByUserId(userId)
+            .stream()
+            .map(this::toDto)
+            .collect(Collectors.toList());
     }
 
-    public List<AssetHistory> getAllHistory() {
-        return assetHistoryRepo.findAll();
+    @Transactional
+    public List<AssetHistoryDTO> getAllAssetHistory() {
+        return assetHistoryRepo.findAll()
+            .stream()
+            .map(this::toDto)
+            .collect(Collectors.toList());
+    }
+
+    @Transactional
+    private AssetHistoryDTO toDto(AssetHistory e) {
+        return new AssetHistoryDTO(
+            e.getId(),
+            e.getUserId(),
+            e.getAssetId(),
+            e.getLogDate(),
+            e.getStatus().name()
+        );
+    }
+
+
+    @Transactional
+    public List<AssetHistoryDTO> getAssetHistoryByStatus(AssetHistoryStatus status) {
+        return assetHistoryRepo.findByStatus(status)
+            .stream()
+            .map(this::toDto)
+            .collect(Collectors.toList());
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    @Transactional
     private void createTransactionHistory(Asset asset, User user, AssetHistoryStatus status) {
         AssetHistory history = new AssetHistory();
-        history.setAsset(asset);
-        history.setUser(user);
+        history.setAssetId(asset.getId());
+        history.setUserId(user != null ? user.getId() : null);
         history.setStatus(status);
         history.setLogDate(LocalDateTime.now());
         assetHistoryRepo.save(history);
