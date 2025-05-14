@@ -1,3 +1,6 @@
+CREATE DATABASE Asset_Tracking_System;
+USE Asset_Tracking_System;
+
 CREATE TABLE users (
     u_id INT PRIMARY KEY AUTO_INCREMENT,
     u_name VARCHAR(50) NOT NULL,
@@ -6,7 +9,6 @@ CREATE TABLE users (
     role CHAR(10) NOT NULL CHECK (role IN ('manager', 'staff'))
 );
 
--- Create assets table
 CREATE TABLE assets (
     as_id INT PRIMARY KEY AUTO_INCREMENT,
     as_name VARCHAR(100) NOT NULL,

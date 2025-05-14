@@ -23,8 +23,7 @@ public class AuthenticationService {
         var user = new User();
         user.setName(request.getName());
         user.setEmail(request.getEmail());
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRole(request.getRole());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));        user.setRole(request.getRole());
 
         return userRepo.save(user);
     }
