@@ -1,6 +1,5 @@
 package com.AssetManagementSystem.Manager.dto;
 
-<<<<<<< HEAD
 import java.util.List;
 
 public class AuthenticationResponse {
@@ -14,7 +13,12 @@ public class AuthenticationResponse {
     public AuthenticationResponse() {
     }
     
-    // Constructor
+    // Constructor with token only
+    public AuthenticationResponse(String token) {
+        this.token = token;
+    }
+    
+    // Constructor with all fields
     public AuthenticationResponse(String token, String email, String name, String role) {
         this.token = token;
         this.email = email;
@@ -23,23 +27,11 @@ public class AuthenticationResponse {
     }
 
     // Getters and setters
-=======
-public class AuthenticationResponse {
-    private String token;
-
-    public AuthenticationResponse(String token) {
-        this.token = token;
-    }
-
->>>>>>> main
     public String getToken() {
         return token;
-    }
-
-    public void setToken(String token) {
+    }    public void setToken(String token) {
         this.token = token;
     }
-<<<<<<< HEAD
     
     public String getEmail() {
         return email;
@@ -72,6 +64,4 @@ public class AuthenticationResponse {
     public void setTokenType(String tokenType) {
         this.tokenType = tokenType;
     }
-=======
->>>>>>> main
 } 

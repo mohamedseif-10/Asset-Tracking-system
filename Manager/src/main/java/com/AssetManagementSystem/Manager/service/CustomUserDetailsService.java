@@ -1,27 +1,4 @@
-<<<<<<< HEAD
-package com.AssetManagementSystem.Manager.service;
-
-import com.AssetManagementSystem.Manager.repository.UserRepository;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
-
-@Service
-public class CustomUserDetailsService implements UserDetailsService {
-
-    private final UserRepository userRepository;
-
-    public CustomUserDetailsService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
-    }
-=======
+// filepath: e:\FCIH\6th term\SEW-2\Asset-Tracking-system-main\Manager\src\main\java\com\AssetManagementSystem\Manager\service\CustomUserDetailsService.java
 package com.AssetManagementSystem.Manager.service;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -45,5 +22,4 @@ public class CustomUserDetailsService implements UserDetailsService {
         return userRepo.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
     }
->>>>>>> main
 } 

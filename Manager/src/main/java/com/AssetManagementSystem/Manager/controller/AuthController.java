@@ -3,8 +3,8 @@ package com.AssetManagementSystem.Manager.controller;
 import com.AssetManagementSystem.Manager.dto.AuthenticationRequest;
 import com.AssetManagementSystem.Manager.dto.AuthenticationResponse;
 import com.AssetManagementSystem.Manager.dto.RegisterRequest;
-import com.AssetManagementSystem.Manager.model.User;
-import com.AssetManagementSystem.Manager.repository.UserRepository;
+import com.AssetManagementSystem.Manager.model.entity.User;
+import com.AssetManagementSystem.Manager.repository.UserRepo;
 import com.AssetManagementSystem.Manager.security.JwtUtils;
 import com.AssetManagementSystem.Manager.service.AuthenticationService;
 import org.springframework.http.ResponseEntity;
@@ -28,19 +28,17 @@ import java.util.Map;
 public class AuthController {    private final AuthenticationService authenticationService;
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
-    private final UserRepository userRepository;
-    private final JwtUtils jwtUtils;
-
-    public AuthController(
+    private final UserRepo userRepo;
+    private final JwtUtils jwtUtils;    public AuthController(
             AuthenticationService authenticationService,
             UserDetailsService userDetailsService,
             PasswordEncoder passwordEncoder,
-            UserRepository userRepository,
+            UserRepo userRepo,
             JwtUtils jwtUtils) {
         this.authenticationService = authenticationService;
         this.userDetailsService = userDetailsService;
         this.passwordEncoder = passwordEncoder;
-        this.userRepository = userRepository;
+        this.userRepo = userRepo;
         this.jwtUtils = jwtUtils;
     }    @GetMapping("/test")
     public ResponseEntity<Map<String, String>> testPublicAccess() {
@@ -50,13 +48,12 @@ public class AuthController {    private final AuthenticationService authenticat
         return ResponseEntity.ok(response);
     }
     
-    @GetMapping("/me")
-    public ResponseEntity<?> getCurrentUser() {
+    @GetMapping("/me")    public ResponseEntity<?> getCurrentUser() {
         try {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             
-            User user = userRepository.findByEmail(userDetails.getUsername())
+            User user = userRepo.findByEmail(userDetails.getUsername())
                 .orElseThrow(() -> new RuntimeException("User not found"));
             
             Map<String, Object> response = new HashMap<>();
@@ -97,9 +94,8 @@ public class AuthController {    private final AuthenticationService authenticat
             
             // Generate JWT token
             String jwt = jwtUtils.generateJwtToken(authentication);
-            
-            // Get user details for the response
-            User user = userRepository.findByEmail(request.getEmail())
+              // Get user details for the response
+            User user = userRepo.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
             
             // Create JWT response with user info
