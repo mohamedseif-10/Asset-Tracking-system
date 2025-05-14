@@ -1,0 +1,20 @@
+2025-05-14 04:59:20 INFO  c.A.Manager.LoggingAspect - Method loadUserByUsername executed successfully in 462 ms.
+2025-05-14 05:00:16 INFO  c.A.Manager.LoggingAspect - Method loadUserByUsername executed successfully in 263 ms.
+2025-05-14 05:00:16 INFO  c.A.Manager.LoggingAspect - Method getAll_Assets executed successfully in 93 ms.
+2025-05-14 06:31:30 INFO  c.A.Manager.LoggingAspect - Method loadUserByUsername executed successfully in 85 ms.
+2025-05-14 06:31:30 INFO  c.A.Manager.LoggingAspect - Method getAll_Assets executed successfully in 19 ms.
+2025-05-14 06:31:38 INFO  c.A.Manager.LoggingAspect - Method loadUserByUsername executed successfully in 10 ms.
+2025-05-14 06:32:41 INFO  c.A.Manager.LoggingAspect - Method loadUserByUsername executed successfully in 113 ms.
+2025-05-14 06:33:38 INFO  c.A.Manager.LoggingAspect - Method register executed successfully in 477 ms.
+2025-05-14 06:33:45 INFO  c.A.Manager.LoggingAspect - Method loadUserByUsername executed successfully in 38 ms.
+2025-05-14 06:34:13 INFO  c.A.Manager.LoggingAspect - Method loadUserByUsername executed successfully in 12 ms.
+2025-05-14 06:34:41 INFO  c.A.Manager.LoggingAspect - Method register executed successfully in 522 ms.
+2025-05-14 06:34:41 WARN  c.A.M.a.PerformanceMonitoringAspect - Method register took 523 ms to execute, which is longer than expected.
+2025-05-14 06:34:46 INFO  c.A.Manager.LoggingAspect - Method loadUserByUsername executed successfully in 22 ms.
+2025-05-14 06:35:16 INFO  c.A.Manager.LoggingAspect - Method register executed successfully in 408 ms.
+2025-05-14 06:35:22 INFO  c.A.Manager.LoggingAspect - Method loadUserByUsername executed successfully in 9 ms.
+2025-05-14 06:35:26 INFO  c.A.Manager.LoggingAspect - Method loadUserByUsername executed successfully in 9 ms.
+2025-05-14 06:38:07 INFO  c.A.Manager.LoggingAspect - Method loadUserByUsername executed successfully in 140 ms.
+2025-05-14 06:38:55 INFO  c.A.Manager.LoggingAspect - Method loadUserByUsername executed successfully in 118 ms.
+2025-05-14 06:41:40 INFO  c.A.Manager.LoggingAspect - Method loadUserByUsername executed successfully in 74 ms.
+2025-05-14 06:42:23 INFO  c.A.Manager.LoggingAspect - Method loadUserByUsername executed successfully in 154 ms.

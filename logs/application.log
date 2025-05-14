@@ -16,3 +16,7 @@
 2025-05-14 01:37:21 INFO  c.A.Manager.LoggingAspect - Method getAllAssetHistory executed successfully in 41 ms.
 2025-05-14 01:38:31 INFO  c.A.Manager.LoggingAspect - Method getAllAssetHistory executed successfully in 626 ms.
 2025-05-14 01:38:31 WARN  c.A.M.a.PerformanceMonitoringAspect - Method getAllAssetHistory took 631 ms to execute, which is longer than expected.
+2025-05-14 04:15:59 INFO  c.A.Manager.LoggingAspect - Method getAll_Assets executed successfully in 151 ms.
+2025-05-14 04:23:42 INFO  c.A.Manager.LoggingAspect - Method getAll_Assets executed successfully in 220 ms.
+2025-05-14 04:23:47 INFO  c.A.Manager.LoggingAspect - Method getAll_Assets executed successfully in 21 ms.
+2025-05-14 04:36:11 INFO  c.A.Manager.LoggingAspect - Method createAsset executed successfully in 104 ms.
